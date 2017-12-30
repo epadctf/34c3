@@ -74,7 +74,7 @@ if __name__ == "__main__":
   host, port = "35.198.176.224", 1337 
   p = remote(host, port)
 
-  e = ELF("./psgc")
+  e = ELF("./sgc")
   #libc = e.libc
   libc = ELF("libc-2.26.so")
 
