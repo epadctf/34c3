@@ -46,21 +46,24 @@ def printProgressOnFlaggu(inputDict):
 	stdout.write("\r"+flag)
 	stdout.flush()
 
-callOffset = 0xb95 - 0x7a0
+callOffset1 = 0xb95 - 0x7a0
+callOffset2 = 0xbc6 - 0x7a0
 
 callGdb("file ./morph")
 
 entrypoint = getEntrypoint()
-callRaxAddr = entrypoint+callOffset
+callRaxAddr1 = entrypoint+callOffset1
+callRaxAddr2 = entrypoint+callOffset2
 
-callGdb("b *"+hex(callRaxAddr))
+callGdb("b *"+hex(callRaxAddr1))
+callGdb("b *"+hex(callRaxAddr2))
 
 inputDict = setupInput()
 inputString = "".join(["%s" % key for (key, _) in inputDict.items()])
 
 callGdb("r "+inputString)
 
-for i in range(len(inputString)-1):
+for i in range(len(inputString)):
 	runToCmp()
 	c = getInputChar()
 	expected = getExpected()
